@@ -332,6 +332,10 @@ type = "https"
 localIP = "{{ $upstream.HTTPS.Host }}"
 localPort = {{ $upstream.HTTPS.Port }}
 
+{{ if $upstream.HTTPS.Subdomain }}
+subdomain = "{{ $upstream.HTTPS.Subdomain }}"
+{{ end }}
+
 {{ if $upstream.HTTPS.CustomDomains }}
 customDomains = [{{ range $i, $d := $upstream.HTTPS.CustomDomains }}{{ if $i }}, {{ end }}"{{ $d }}"{{ end }}]
 {{ end }}

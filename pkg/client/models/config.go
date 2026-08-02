@@ -277,6 +277,7 @@ type Upstream_HTTP_HealthCheck struct {
 type Upstream_HTTPS struct {
 	Host          string
 	Port          int
+	Subdomain     string
 	CustomDomains []string
 	ProxyProtocol *string
 	Transport     *Upstream_TCP_Transport
@@ -922,7 +923,14 @@ func NewConfig(k8sclient client.Client,
 			upstream.Type = 6
 			upstream.HTTPS.Host = upstreamObject.Spec.HTTPS.Host
 			upstream.HTTPS.Port = upstreamObject.Spec.HTTPS.Port
-			upstream.HTTPS.CustomDomains = upstreamObject.Spec.HTTPS.CustomDomains
+
+			if upstreamObject.Spec.HTTPS.Subdomain != "" {
+				upstream.HTTPS.Subdomain = upstreamObject.Spec.HTTPS.Subdomain
+			}
+
+			if len(upstreamObject.Spec.HTTPS.CustomDomains) > 0 {
+				upstream.HTTPS.CustomDomains = upstreamObject.Spec.HTTPS.CustomDomains
+			}
 
 			if upstreamObject.Spec.HTTPS.ProxyProtocol != nil {
 				upstream.HTTPS.ProxyProtocol = upstreamObject.Spec.HTTPS.ProxyProtocol

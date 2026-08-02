@@ -1,7 +1,13 @@
 {{ template "chart.header" . }}
 {{ template "chart.description" . }}
 
-{{ template "chart.versionBadge" . }}{{ template "chart.typeBadge" . }}{{ template "chart.appVersionBadge" . }}[![made with Go](https://img.shields.io/badge/made%20with-Go-brightgreen)](http://golang.org) [![Github main branch build](https://img.shields.io/github/workflow/status/zufardhiyaulhaq/frp-operator/Main)](https://github.com/zufardhiyaulhaq/frp-operator/actions/workflows/main.yml) [![GitHub issues](https://img.shields.io/github/issues/zufardhiyaulhaq/frp-operator)](https://github.com/zufardhiyaulhaq/frp-operator/issues) [![GitHub pull requests](https://img.shields.io/github/issues-pr/zufardhiyaulhaq/frp-operator)](https://github.com/zufardhiyaulhaq/frp-operator/pulls)[![Artifact Hub](https://img.shields.io/endpoint?url=https://artifacthub.io/badge/repository/frp-operator)](https://artifacthub.io/packages/search?repo=frp-operator)
+{{ template "chart.versionBadge" . }}{{ template "chart.typeBadge" . }}{{ template "chart.appVersionBadge" . }}[![made with Go](https://img.shields.io/badge/made%20with-Go-brightgreen)](http://golang.org) [![build status](https://img.shields.io/github/actions/workflow/status/librepod/frp-operator/main.yml?branch=main)](https://github.com/librepod/frp-operator/actions/workflows/main.yml) [![GitHub issues](https://img.shields.io/github/issues/librepod/frp-operator)](https://github.com/librepod/frp-operator/issues) [![GitHub pull requests](https://img.shields.io/github/issues-pr/librepod/frp-operator)](https://github.com/librepod/frp-operator/pulls)
+
+## About this fork
+
+This is the **LibrePod** fork of [`zufardhiyaulhaq/frp-operator`](https://github.com/zufardhiyaulhaq/frp-operator). The upstream project is no longer actively maintained and pending pull requests are no longer being reviewed, so LibrePod adopted the fork to keep it healthy, ship fixes, and adapt it to our own platform. Full credit for the original design and implementation goes to [Zufar Dhiyaulhaq](https://github.com/zufardhiyaulhaq).
+
+Development, issues, and releases now happen in this repository.
 
 ## Features
 
@@ -44,7 +50,7 @@
 To install the chart with the release name `my-release`:
 
 ```console
-helm repo add frp-operator https://zufardhiyaulhaq.com/frp-operator/charts/releases/
+helm repo add frp-operator https://librepod.github.io/frp-operator/
 helm install my-frp-operator frp-operator/frp-operator --values values.yaml
 ```
 
@@ -67,7 +73,7 @@ token = yourtoken
 frps -c ./frps.ini
 ```
 
-You can reuse our build-in ansible playbook to setup the FRP server on your machine, please check https://github.com/zufardhiyaulhaq/frp-operator/tree/main/ansible/server
+You can reuse our build-in ansible playbook to setup the FRP server on your machine, please check https://github.com/librepod/frp-operator/tree/main/ansible/server
 
 ## Usage
 1. Apply some example
@@ -95,6 +101,6 @@ http://178.128.100.87:8080/
 
 {{ template "chart.valuesSection" . }}
 
-see example files [here](https://github.com/zufardhiyaulhaq/frp-operator/blob/main/charts/frp-operator/values.yaml)
+see example files [here](https://github.com/librepod/frp-operator/blob/main/charts/frp-operator/values.yaml)
 
 {{ template "helm-docs.versionFooter" . }}

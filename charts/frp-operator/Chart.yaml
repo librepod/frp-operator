@@ -2,12 +2,11 @@
 apiVersion: v2
 name: frp-operator
 description: Expose your service in Kubernetes to the Internet with open source FRP!
-version: 1.5.0
-appVersion: 0.7.0
+version: 1.6.0
+appVersion: 0.8.0
 type: application
-home: https://github.com/zufardhiyaulhaq/frp-operator
+home: https://github.com/librepod/frp-operator
 
 maintainers:
-- name: Zufar Dhiyaulhaq
-  email: zufardhiyaulhaq@gmail.com
-  url: https://zufardhiyaulhaq.com
+- name: LibrePod
+  url: https://github.com/librepod

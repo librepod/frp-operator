@@ -1821,6 +1821,8 @@ spec:
                     - v1
                     - v2
                     type: string
+                  subdomain:
+                    type: string
                   transport:
                     properties:
                       bandwidthLimit:
@@ -1853,7 +1855,6 @@ spec:
                     - useEncryption
                     type: object
                 required:
-                - customDomains
                 - host
                 - port
                 type: object
