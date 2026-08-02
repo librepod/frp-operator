@@ -2,7 +2,7 @@
 
 Expose your service in Kubernetes to the Internet with open source FRP!
 
-![Version: 1.5.1](https://img.shields.io/badge/Version-1.5.1-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.7.1](https://img.shields.io/badge/AppVersion-0.7.1-informational?style=flat-square) [![made with Go](https://img.shields.io/badge/made%20with-Go-brightgreen)](http://golang.org) [![build status](https://img.shields.io/github/actions/workflow/status/librepod/frp-operator/main.yml?branch=main)](https://github.com/librepod/frp-operator/actions/workflows/main.yml) [![GitHub issues](https://img.shields.io/github/issues/librepod/frp-operator)](https://github.com/librepod/frp-operator/issues) [![GitHub pull requests](https://img.shields.io/github/issues-pr/librepod/frp-operator)](https://github.com/librepod/frp-operator/pulls)
+![Version: 1.6.0](https://img.shields.io/badge/Version-1.6.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.8.0](https://img.shields.io/badge/AppVersion-0.8.0-informational?style=flat-square) [![made with Go](https://img.shields.io/badge/made%20with-Go-brightgreen)](http://golang.org) [![build status](https://img.shields.io/github/actions/workflow/status/librepod/frp-operator/main.yml?branch=main)](https://github.com/librepod/frp-operator/actions/workflows/main.yml) [![GitHub issues](https://img.shields.io/github/issues/librepod/frp-operator)](https://github.com/librepod/frp-operator/issues) [![GitHub pull requests](https://img.shields.io/github/issues-pr/librepod/frp-operator)](https://github.com/librepod/frp-operator/pulls)
 
 ## About this fork
 
@@ -104,7 +104,7 @@ http://178.128.100.87:8080/
 |-----|------|---------|-------------|
 | operator.image | string | `"ghcr.io/librepod/frp-operator"` |  |
 | operator.replica | int | `1` |  |
-| operator.tag | string | `"v0.7.1"` |  |
+| operator.tag | string | `"v0.8.0"` |  |
 | resources.limits.cpu | string | `"200m"` |  |
 | resources.limits.memory | string | `"100Mi"` |  |
 | resources.requests.cpu | string | `"100m"` |  |
