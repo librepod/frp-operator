@@ -1032,6 +1032,34 @@ func TestTemplateHTTPSUpstreamBasic(t *testing.T) {
 	assertContains(t, output, `customDomains = ["secure.example.com"]`)
 }
 
+func TestTemplateHTTPSUpstreamWithSubdomain(t *testing.T) {
+	config := testConfig{
+		Common: testCommon{
+			ServerAddress: "frp.example.com",
+			ServerPort:    7000,
+			AdminAddress:  "0.0.0.0",
+			AdminPort:     7400,
+			AdminUsername: "admin",
+			AdminPassword: "secret",
+		},
+		Upstreams: []testUpstream{
+			{
+				Name: "https-service",
+				Type: 6,
+				HTTPS: testUpstreamHTTPS{
+					Host:      "localhost",
+					Port:      443,
+					Subdomain: "myapp",
+				},
+			},
+		},
+	}
+
+	output := renderTemplate(t, config)
+
+	assertContains(t, output, `subdomain = "myapp"`)
+}
+
 func TestTemplateHTTPSUpstreamWithProxyProtocol(t *testing.T) {
 	proxyProtocol := "v2"
 	config := testConfig{
