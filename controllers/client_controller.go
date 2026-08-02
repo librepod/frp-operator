@@ -237,7 +237,11 @@ func (r *ClientReconciler) Reconcile(ctx context.Context, req ctrl.Request) (ctr
 		if statusErr := r.updateClientStatus(ctx, client, status.ClientPhaseFailed, err.Error(), len(filteredUpstreams), len(filteredVisitors)); statusErr != nil {
 			log.Error(statusErr, "failed to update client status")
 		}
-		return ctrl.Result{}, err
+		// Do not return err: an unresolved image is a permanent config error, not a
+		// transient one. Returning it would schedule exponential-backoff requeues that
+		// re-emit this Warning event and re-write status indefinitely. The For(Client)
+		// watch re-triggers Reconcile when spec.podTemplate.image is set.
+		return ctrl.Result{}, nil
 	}
 	podBuilder := builder.NewPodBuilder().
 		SetName(client.Name).

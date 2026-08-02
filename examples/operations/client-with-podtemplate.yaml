@@ -31,8 +31,10 @@ spec:
           name: admin-creds
           key: password
   podTemplate:
-    # image overrides the operator's default frpc image (chart frpc.defaultImage)
-    image: fatedier/frpc:v0.65.0
+    # image overrides the operator's default frpc image (chart frpc.defaultImage).
+    # Pinned to an older release here to demonstrate the override — this Client keeps
+    # a known-good frpc version while others inherit the chart default (v0.65.0).
+    image: fatedier/frpc:v0.64.0
     resources:
       requests:
         cpu: "100m"
