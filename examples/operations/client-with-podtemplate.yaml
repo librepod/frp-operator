@@ -31,6 +31,8 @@ spec:
           name: admin-creds
           key: password
   podTemplate:
+    # image overrides the operator's default frpc image (chart frpc.defaultImage)
+    image: fatedier/frpc:v0.65.0
     resources:
       requests:
         cpu: "100m"
