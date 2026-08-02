@@ -6,6 +6,11 @@ operator:
   # number of replica for deployment
   replica: 1
 
+# frpc client image the operator deploys for each Client
+frpc:
+  # defaultImage is the frpc image used when a Client omits spec.podTemplate.image
+  defaultImage: "fatedier/frpc:v0.65.0"
+
 resources:
   limits:
     cpu: 200m

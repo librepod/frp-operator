@@ -27,6 +27,7 @@ spec:
         - --metrics-bind-address=:8443
         - --metrics-secure=true
         - --leader-elect
+        - --frpc-default-image={{ .Values.frpc.defaultImage }}
         command:
         - /manager
         image: "{{ .Values.operator.image }}:{{ .Values.operator.tag }}"
