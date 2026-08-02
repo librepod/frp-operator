@@ -28,4 +28,5 @@ const (
 	ReasonConfigMapUpdated   = "ConfigMapUpdated"
 	ReasonConfigReloaded     = "ConfigReloaded"
 	ReasonConfigReloadFailed = "ConfigReloadFailed"
+	ReasonImageUnresolved    = "ImageUnresolved"
 )

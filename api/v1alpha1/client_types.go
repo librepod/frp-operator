@@ -130,6 +130,10 @@ type ClientSpec_Server_AdminServer_Password struct {
 // ClientSpec_PodTemplate allows customization of the FRP client pod
 type ClientSpec_PodTemplate struct {
 	// +optional
+	// Image overrides the frpc container image (e.g. to pin a version or use a private registry).
+	// If unset, the operator's default frpc image (--frpc-default-image) is used.
+	Image string `json:"image,omitempty"`
+	// +optional
 	// Resources defines compute resources for the FRP client container
 	Resources *corev1.ResourceRequirements `json:"resources,omitempty"`
 	// +optional

@@ -988,6 +988,11 @@ spec:
                     description: Annotations are additional annotations to add to
                       the pod
                     type: object
+                  image:
+                    description: |-
+                      Image overrides the frpc container image (e.g. to pin a version or use a private registry).
+                      If unset, the operator's default frpc image (--frpc-default-image) is used.
+                    type: string
                   imagePullSecrets:
                     description: ImagePullSecrets are references to secrets for pulling
                       the FRP image
