@@ -16,7 +16,7 @@ vi ~/.ssh/authorized_keys
 ```
 3. clone the repository
 ```shell
-git clone https://github.com/zufardhiyaulhaq/frp-operator
+git clone https://github.com/librepod/frp-operator
 cd frp-operator/ansible/server
 ```
 1. Adjust variables
