@@ -19,7 +19,11 @@ on:
 
 env:
   REGISTRY: ghcr.io
-  CHART_OCI_REPO: oci://ghcr.io/librepod/charts/frp-operator
+  # helm push appends /<chart-name>:<version> to this prefix, landing the chart
+  # at ghcr.io/librepod/charts/frp-operator:<version>. Do NOT include the chart
+  # name here, or it gets doubled (…/charts/frp-operator/frp-operator).
+  CHART_OCI_PREFIX: oci://ghcr.io/librepod/charts
+  CHART_NAME: frp-operator
   CHART_PATH: ./charts/frp-operator
 
 jobs:
@@ -66,13 +70,13 @@ jobs:
           VERSION: ${{ steps.version.outputs.version }}
         run: |
           set -euo pipefail
-          helm push "out/frp-operator-${VERSION}.tgz" "${CHART_OCI_REPO}"
+          helm push "out/${CHART_NAME}-${VERSION}.tgz" "${CHART_OCI_PREFIX}"
 
       - name: Verify push
         env:
           VERSION: ${{ steps.version.outputs.version }}
         run: |
           set -euo pipefail
-          echo "Published ${CHART_OCI_REPO}:${VERSION}"
-          helm pull "${CHART_OCI_REPO}" --version "${VERSION}" --destination /tmp/verify
+          echo "Published ${CHART_OCI_PREFIX}/${CHART_NAME}:${VERSION}"
+          helm pull "${CHART_OCI_PREFIX}/${CHART_NAME}" --version "${VERSION}" --destination /tmp/verify
           echo "Pull OK"
