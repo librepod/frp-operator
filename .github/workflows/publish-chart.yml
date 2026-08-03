@@ -76,7 +76,17 @@ jobs:
         env:
           VERSION: ${{ steps.version.outputs.version }}
         run: |
-          set -euo pipefail
+          set -uo pipefail
+          mkdir -p /tmp/verify
           echo "Published ${CHART_OCI_PREFIX}/${CHART_NAME}:${VERSION}"
-          helm pull "${CHART_OCI_PREFIX}/${CHART_NAME}" --version "${VERSION}" --destination /tmp/verify
-          echo "Pull OK"
+          # GHCR can take a few seconds to make a freshly-pushed tag readable.
+          for i in 1 2 3 4 5; do
+            if helm pull "${CHART_OCI_PREFIX}/${CHART_NAME}" --version "${VERSION}" --destination /tmp/verify; then
+              echo "Pull OK"
+              exit 0
+            fi
+            echo "pull attempt ${i} failed; retrying in 5s..."
+            sleep 5
+          done
+          echo "::error::chart not readable after push"
+          exit 1
