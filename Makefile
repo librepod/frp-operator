@@ -118,7 +118,7 @@ build: generate fmt vet ## Build manager binary.
 
 .PHONY: run
 run: manifests generate fmt vet ## Run a controller from your host.
-	go run ./main.go
+	go run ./main.go --frpc-default-image=fatedier/frpc:v0.65.0
 
 .PHONY: docker-build
 docker-build: test ## Build docker image with the manager.

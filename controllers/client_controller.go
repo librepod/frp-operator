@@ -56,10 +56,11 @@ const (
 // ClientReconciler reconciles a Client object
 type ClientReconciler struct {
 	client.Client
-	Scheme    *runtime.Scheme
-	Config    *rest.Config
-	Clientset kubernetes.Interface
-	Recorder  record.EventRecorder
+	Scheme           *runtime.Scheme
+	Config           *rest.Config
+	Clientset        kubernetes.Interface
+	Recorder         record.EventRecorder
+	DefaultFRPCImage string
 }
 
 // readPodFile reads a file from a pod container and returns its content
@@ -225,10 +226,27 @@ func (r *ClientReconciler) Reconcile(ctx context.Context, req ctrl.Request) (ctr
 	}
 
 	log.Info("Build pod")
+	var perCRImage string
+	if pt := client.Spec.PodTemplate; pt != nil {
+		perCRImage = pt.Image
+	}
+	image, err := resolveFRPCImage(perCRImage, r.DefaultFRPCImage)
+	if err != nil {
+		r.setCondition(client, status.ConditionTypeReady, metav1.ConditionFalse, status.ReasonImageUnresolved, err.Error())
+		r.Recorder.Event(client, corev1.EventTypeWarning, status.ReasonImageUnresolved, err.Error())
+		if statusErr := r.updateClientStatus(ctx, client, status.ClientPhaseFailed, err.Error(), len(filteredUpstreams), len(filteredVisitors)); statusErr != nil {
+			log.Error(statusErr, "failed to update client status")
+		}
+		// Do not return err: an unresolved image is a permanent config error, not a
+		// transient one. Returning it would schedule exponential-backoff requeues that
+		// re-emit this Warning event and re-write status indefinitely. The For(Client)
+		// watch re-triggers Reconcile when spec.podTemplate.image is set.
+		return ctrl.Result{}, nil
+	}
 	podBuilder := builder.NewPodBuilder().
 		SetName(client.Name).
 		SetNamespace(client.Namespace).
-		SetImage("fatedier/frpc:v0.65.0").
+		SetImage(image).
 		SetPodTemplate(client.Spec.PodTemplate)
 
 	// Wire TLS secret if configured

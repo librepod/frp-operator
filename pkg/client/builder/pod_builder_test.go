@@ -12,7 +12,7 @@ func TestPodBuilder_Basic(t *testing.T) {
 	pod, err := NewPodBuilder().
 		SetName("test").
 		SetNamespace("default").
-		SetImage("fatedier/frpc:v0.65.0").
+		SetImage("example/frpc:test").
 		Build()
 
 	if err != nil {
@@ -29,8 +29,8 @@ func TestPodBuilder_Basic(t *testing.T) {
 	if len(pod.Spec.Containers) != 1 {
 		t.Errorf("Expected 1 container, got %d", len(pod.Spec.Containers))
 	}
-	if pod.Spec.Containers[0].Image != "fatedier/frpc:v0.65.0" {
-		t.Errorf("Expected image fatedier/frpc:v0.65.0, got %s", pod.Spec.Containers[0].Image)
+	if pod.Spec.Containers[0].Image != "example/frpc:test" {
+		t.Errorf("Expected image example/frpc:test, got %s", pod.Spec.Containers[0].Image)
 	}
 
 	// Check default labels
@@ -78,7 +78,7 @@ func TestPodBuilder_WithPodTemplate(t *testing.T) {
 	pod, err := NewPodBuilder().
 		SetName("test").
 		SetNamespace("default").
-		SetImage("fatedier/frpc:v0.65.0").
+		SetImage("example/frpc:test").
 		SetPodTemplate(pt).
 		Build()
 
@@ -143,7 +143,7 @@ func TestPodBuilder_WithTolerations(t *testing.T) {
 	pod, err := NewPodBuilder().
 		SetName("test").
 		SetNamespace("default").
-		SetImage("fatedier/frpc:v0.65.0").
+		SetImage("example/frpc:test").
 		SetPodTemplate(pt).
 		Build()
 
@@ -183,7 +183,7 @@ func TestPodBuilder_WithAffinity(t *testing.T) {
 	pod, err := NewPodBuilder().
 		SetName("test").
 		SetNamespace("default").
-		SetImage("fatedier/frpc:v0.65.0").
+		SetImage("example/frpc:test").
 		SetPodTemplate(pt).
 		Build()
 
@@ -209,7 +209,7 @@ func TestPodBuilder_WithImagePullSecrets(t *testing.T) {
 	pod, err := NewPodBuilder().
 		SetName("test").
 		SetNamespace("default").
-		SetImage("fatedier/frpc:v0.65.0").
+		SetImage("example/frpc:test").
 		SetPodTemplate(pt).
 		Build()
 
@@ -238,7 +238,7 @@ func TestPodBuilder_WithSecurityContext(t *testing.T) {
 	pod, err := NewPodBuilder().
 		SetName("test").
 		SetNamespace("default").
-		SetImage("fatedier/frpc:v0.65.0").
+		SetImage("example/frpc:test").
 		SetPodTemplate(pt).
 		Build()
 
@@ -261,7 +261,7 @@ func TestPodBuilder_NilPodTemplate(t *testing.T) {
 	pod, err := NewPodBuilder().
 		SetName("test").
 		SetNamespace("default").
-		SetImage("fatedier/frpc:v0.65.0").
+		SetImage("example/frpc:test").
 		SetPodTemplate(nil).
 		Build()
 
@@ -291,7 +291,7 @@ func TestPodBuilder_LabelAnnotationOverride(t *testing.T) {
 	pod, err := NewPodBuilder().
 		SetName("test").
 		SetNamespace("default").
-		SetImage("fatedier/frpc:v0.65.0").
+		SetImage("example/frpc:test").
 		SetPodTemplate(pt).
 		Build()
 
